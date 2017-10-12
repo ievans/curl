@@ -24,58 +24,38 @@ matrix:
     include:
         - os: linux
           compiler: gcc
-          dist: trusty
-          env: T=normal C=--with-gssapi
+          dist: precise
+          env: T=coverage CFLAGS="-Wnull-dereference -fstack-protector-all -D_FORTIFY_SOURCE=2 -Wduplicated-cond"
+
         - os: linux
           compiler: gcc
-          dist: trusty
-          env: T=normal C="--disable-http --disable-smtp --disable-imap"
+          dist: precise
+          env: T=coverage CFLAGS="-Wall -Weverything"
+
         - os: linux
           compiler: gcc
-          dist: trusty
-          env: T=normal C=--enable-ares
-        - os: linux
-          compiler: clang
-          dist: trusty
-          env: T=debug
-        - os: osx
-          compiler: gcc
-          env: T=debug
-        - os: osx
-          compiler: gcc
-          env: T=debug C=--enable-ares
-        - os: osx
-          compiler: gcc
-          env: T=debug C="--with-ssl=/usr/local/opt/openssl --with-libmetalink"
-        - os: osx
-          compiler: gcc
-          env: T=debug C="--with-ssl=/usr/local/opt/libressl --with-libmetalink"
-        - os: osx
-          compiler: clang
-          env: T=debug C="--without-ssl --with-darwinssl --with-libmetalink"
-        - os: osx
-          compiler: clang
-          env: T=normal
-        - os: linux
-          compiler: gcc
-          dist: trusty
-          env: T=cmake
-        - os: linux
-          compiler: clang
-          dist: trusty
-          env: T=cmake
+          dist: precise
+          env: T=coverage CFLAGS=""
+
         - os: linux
           compiler: gcc
           dist: precise
           env: T=coverage
+
         - os: linux
           compiler: gcc
-          dist: trusty
-          env: T=distcheck
+          dist: precise
+          env: T=coverage
+
         - os: linux
-          compiler: clang
-          dist: trusty
-          env: T=fuzzer
+          compiler: gcc
+          dist: precise
+          env: T=coverage
+
+        - os: linux
+          compiler: gcc
+          dist: precise
+          env: T=coverage
 
 install:
   - pip install --user cpp-coveralls
