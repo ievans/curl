@@ -37,7 +37,11 @@ matrix:
           dist: precise
           env: T=coverage CFLAGS="-fsanitize=address"
 
-
+        - os: linux
+          compiler: clang
+          dist: precise
+          env: T=coverage CFLAGS="-ftrapv"
+          
 install:
   - pip install --user cpp-coveralls
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update > /dev/null; fi
