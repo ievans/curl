@@ -25,37 +25,18 @@ matrix:
         - os: linux
           compiler: gcc
           dist: precise
-          env: T=coverage CFLAGS="-Wnull-dereference -fstack-protector-all -D_FORTIFY_SOURCE=2 -Wduplicated-cond"
+          env: T=coverage CFLAGS="-Wnull-dereference -fstack-protector-all -D_FORTIFY_SOURCE=2 -Wduplicated-cond -fsanitize=address"
 
         - os: linux
-          compiler: gcc
+          compiler: clang
           dist: precise
           env: T=coverage CFLAGS="-Wall -Weverything"
 
         - os: linux
-          compiler: gcc
+          compiler: clang
           dist: precise
-          env: T=coverage CFLAGS=""
+          env: T=coverage CFLAGS="-fsanitize=address"
 
-        - os: linux
-          compiler: gcc
-          dist: precise
-          env: T=coverage
-
-        - os: linux
-          compiler: gcc
-          dist: precise
-          env: T=coverage
-
-        - os: linux
-          compiler: gcc
-          dist: precise
-          env: T=coverage
-
-        - os: linux
-          compiler: gcc
-          dist: precise
-          env: T=coverage
 
 install:
   - pip install --user cpp-coveralls
